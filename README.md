@@ -8,12 +8,12 @@
 4. 接著在瀏覽器頁面，按"F12"，到"主控台"("element")
 5. 複製下面的代碼到"主控台"裡面，按下"Enter"就會自動跑。
    ```js
-(function () {
-  console.log("Loading script ...");
+   (function () {
+     console.log("Loading script ...");
 
-  let script = document.createElement("script");
-  script.onload = function () {
-    const { jsPDF } = window.jspdf;
+     let script = document.createElement("script");
+     script.onload = function () {
+       const { jsPDF } = window.jspdf;
 
     // 透過 "blob"方式擷取資料
     let pdf = null;
@@ -78,25 +78,25 @@
       document.body.removeChild(script);
       console.log("PDF downloaded!");
     });
-  };
+     };
 
-  // Load the jsPDF library using the trusted URL
-  let scriptURL = "https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js";
-  let trustedURL;
-  if (window.trustedTypes && trustedTypes.createPolicy) {
+     // Load the jsPDF library using the trusted URL
+     let scriptURL = "https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js";
+     let trustedURL;
+     if (window.trustedTypes && trustedTypes.createPolicy) {
     const policy = trustedTypes.createPolicy("myPolicy", {
       createScriptURL: (input) => {
         return input;
       },
     });
     trustedURL = policy.createScriptURL(scriptURL);
-  } else {
+     } else {
     trustedURL = scriptURL;
-  }
+     }
 
-  script.src = trustedURL;
-  document.body.appendChild(script);
-})();
+     script.src = trustedURL;
+     document.body.appendChild(script);
+   })();
    ```
 6. 下載下來的pdf檔案，會是以圖片的形式呈現，並非是向量與像素的複合型態；但版面會比較符合原始檔案的樣子。
 
